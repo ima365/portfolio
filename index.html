@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Senior Salesforce Admin Portfolio</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f9;
+      color: #333;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    header {
+      background: #00a1e0;
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      animation: slideDown 1s ease-out;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+    }
+
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 2rem 1rem;
+    }
+
+    .about, .projects {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    .about.visible, .projects.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about h2, .projects h2 {
+      color: #0070d2;
+      margin-bottom: 1rem;
+    }
+
+    .projects h2 {
+      margin-bottom: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+    }
+
+    .card h3 {
+      color: #0070d2;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      background: #e1e5ea;
+      color: #333;
+      font-size: 0.9rem;
+    }
+
+    footer a {
+      color: #0070d2;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-30px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Muda Ibrahim</h1>
+    <p>Senior Salesforce Administrator | Automation • Integration • Data • UX</p>
+  </header>
+
+  <div class="container">
+    <section class="about">
+      <h2>About Me</h2>
+      <p>I’m a Salesforce Certified Administrator with hands-on expertise in automation (Flow & Process Builder), integration (external systems, APIs), user adoption strategies, security & compliance, analytics, and troubleshooting. Passionate about building scalable CRM solutions that empower users and drive business value.</p>
+    </section>
+
+    <section class="projects">
+      <h2>Portfolio Projects</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Case Auto Routing via Omni-Channel</h3>
+          <p>Designed and deployed Omni-Channel for auto-assignment of Cases by type and priority, improving response time by 40%.</p>
+        </div>
+
+        <div class="card">
+          <h3>Quote to Order Flow Automation</h3>
+          <p>Built a complex Flow to automate syncing of Quote Line Items to Order Products upon Opportunity closure.</p>
+        </div>
+
+        <div class="card">
+          <h3>Sales Performance Dashboard</h3>
+          <p>Created executive dashboards and reports for pipeline, top-performing reps, and product ROI tracking.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Muda Ibrahim • Connect via <a href="mailto:you@example.com">Email</a>
+  </footer>
+
+  <script>
+    // Simple scroll reveal effect
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    document.querySelectorAll('.about, .projects').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+
+</body>
+</html>
