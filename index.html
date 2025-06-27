@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Muda Portfolio</title>
+  <title>Muda Ibrahim | Salesforce Admin Portfolio</title>
   <link
     rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -130,27 +130,12 @@
       margin-bottom: 4rem;
     }
 
-    .hero-image {
-      flex: none;
-      width: 50%;
-      min-width: 280px;
-      text-align: center;
-      order: 0; /* first */
-    }
-
-    .hero-image img {
-      max-width: 250px;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(0, 191, 165, 0.6);
-    }
-
     .hero-text {
-      flex: none;
-      width: 50%;
+      flex: none;           /* Fix size */
+      width: 50%;           /* Half width */
       min-width: 280px;
       color: #00bfa5;
-      text-align: left; /* left aligned now */
-      order: 1; /* second */
+      /* Removed margin-right */
     }
 
     .hero-text h1 {
@@ -161,6 +146,19 @@
     .dynamic-text {
       font-weight: bold;
       color: #00bfa5;
+    }
+
+    .hero-image {
+      flex: none;           /* Fix size */
+      width: 50%;           /* Half width */
+      min-width: 280px;
+      text-align: center;
+    }
+
+    .hero-image img {
+      max-width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 191, 165, 0.6);
     }
 
     /* Skills slider */
@@ -361,8 +359,6 @@
       .hero-text,
       .hero-image {
         width: 100%;
-        text-align: center; /* center on mobile */
-        order: 0 !important; /* reset order for mobile */
       }
 
       .hero-image img {
@@ -443,12 +439,12 @@
   <div class="container">
     <!-- Hero Section with dynamic text and image -->
     <section class="hero" aria-label="Introduction">
-      <div class="hero-image">
-        <img src="./muda.jfif" alt="Muda Ibrahim Avatar" />
-      </div>
       <div class="hero-text">
         <h1>Hi, I'm Mudashiru Ibrahim</h1>
         <h2>I am <span class="dynamic-text">a Salesforce Administrator</span></h2>
+      </div>
+      <div class="hero-image">
+        <img src="./muda.jfif" alt="Muda Ibrahim Avatar" />
       </div>
     </section>
 
@@ -521,4 +517,37 @@
             src="https://cdn-icons-png.flaticon.com/512/724/724664.png"
             alt="Phone Icon"
           />
-         
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            alt="GitHub Icon"
+          />
+          <span>github.com/yourusername</span>
+        </div>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+            alt="LinkedIn Icon"
+          />
+          <span>linkedin.com/in/yourusername</span>
+        </div>
+        <button class="resume-btn">Download Resume</button>
+      </div>
+      <div class="contact-right">
+        <form onsubmit="event.preventDefault(); alert('Message sent!')">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    &copy; 2025 Muda Ibrahim. All rights reserved. | Built with ❤️ using HTML &amp; CSS.
+  </footer>
+</body>
+</html>
