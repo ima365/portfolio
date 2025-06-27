@@ -53,13 +53,13 @@
       left: 0;
       right: 0;
       height: 60px;
-      background: #00bfa5; /* fully opaque teal */
+      background: #00bfa5; /* solid, no transparency */
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 2rem;
       z-index: 1000;
-      box-shadow: 0 2px 8px rgba(0, 191, 165, 0.5);
+      box-shadow: 0 2px 8px rgba(0, 191, 165, 0.8);
       user-select: none;
     }
 
@@ -81,6 +81,7 @@
       text-decoration: none;
       font-weight: 600;
       transition: color 0.3s ease;
+      cursor: pointer;
     }
 
     nav ul li a:hover,
@@ -96,6 +97,9 @@
       padding: 4rem 1rem 2rem;
       position: relative;
       z-index: 1;
+      background: rgba(0, 0, 0, 0.85);
+      backdrop-filter: blur(8px);
+      border-radius: 8px;
     }
 
     h1, h2 {
@@ -115,6 +119,48 @@
     .skills,
     .projects {
       margin-bottom: 4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0; /* No gap for closeness */
+      margin-bottom: 4rem;
+    }
+
+    .hero-image {
+      flex: none;
+      width: 50%;
+      min-width: 280px;
+      text-align: center;
+      order: 0; /* first */
+    }
+
+    .hero-image img {
+      max-width: 250px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0, 191, 165, 0.6);
+    }
+
+    .hero-text {
+      flex: none;
+      width: 50%;
+      min-width: 280px;
+      color: #00bfa5;
+      text-align: left; /* left aligned now */
+      order: 1; /* second */
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .dynamic-text {
+      font-weight: bold;
+      color: #00bfa5;
     }
 
     /* Skills slider */
@@ -289,10 +335,9 @@
       padding: 1.5rem;
       text-align: center;
       font-size: 0.9rem;
-      color: #ddd;
-      background: rgba(0, 191, 165, 0.25); /* brighter than before */
+      color: #555;
+      background: rgba(0, 191, 165, 0.1);
       user-select: none;
-      box-shadow: inset 0 0 10px rgba(0,191,165,0.3);
     }
 
     @media (max-width: 768px) {
@@ -307,8 +352,80 @@
       nav ul {
         gap: 1rem;
       }
+
+      .hero {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .hero-text,
+      .hero-image {
+        width: 100%;
+        text-align: center; /* center on mobile */
+        order: 0 !important; /* reset order for mobile */
+      }
+
+      .hero-image img {
+        max-width: 100%;
+      }
     }
   </style>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // Dynamic typing effect for hero text
+      const dynamicText = document.querySelector(".dynamic-text");
+      const roles = [
+        "a Salesforce Administrator",
+        "a double star ranger",
+        "6x Salesforce Certified"
+      ];
+      let i = 0;
+      let charIndex = 0;
+      let isDeleting = false;
+
+      function type() {
+        const currentRole = roles[i];
+        if (isDeleting) {
+          dynamicText.textContent = currentRole.substring(0, charIndex--);
+          if (charIndex < 0) {
+            isDeleting = false;
+            i = (i + 1) % roles.length;
+          }
+        } else {
+          dynamicText.textContent = currentRole.substring(0, charIndex++);
+          if (charIndex > currentRole.length) {
+            isDeleting = true;
+            setTimeout(type, 1000);
+            return;
+          }
+        }
+        setTimeout(type, isDeleting ? 50 : 100);
+      }
+
+      type();
+
+      // Smooth scroll with offset for fixed header
+      const header = document.querySelector("header");
+      const navLinks = document.querySelectorAll("nav ul li a");
+
+      navLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const targetId = link.getAttribute("href").substring(1);
+          const targetSection = document.getElementById(targetId);
+          if (!targetSection) return;
+
+          const headerHeight = header.offsetHeight;
+          const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - headerHeight - 10; // 10px padding
+
+          window.scrollTo({
+            top: targetPosition,
+            behavior: "smooth"
+          });
+        });
+      });
+    });
+  </script>
 </head>
 <body>
   <header>
@@ -324,8 +441,18 @@
   </header>
 
   <div class="container">
+    <!-- Hero Section with dynamic text and image -->
+    <section class="hero" aria-label="Introduction">
+      <div class="hero-image">
+        <img src="https://avatars.githubusercontent.com/u/9919?s=280&v=4" alt="Muda Ibrahim Avatar" />
+      </div>
+      <div class="hero-text">
+        <h1>Hi, I'm Mudashiru Ibrahim</h1>
+        <h2>I am <span class="dynamic-text">a Salesforce Administrator</span></h2>
+      </div>
+    </section>
+
     <section id="about" class="about">
-      <h1>Muda Ibrahim</h1>
       <h2>About Me</h2>
       <p>
         I’m a Salesforce Certified Administrator with hands-on expertise in automation (Flow & Process Builder), integration (external systems, APIs), user adoption strategies, security & compliance, analytics, and troubleshooting. Passionate about building scalable CRM solutions that empower users and drive business value.
@@ -394,37 +521,4 @@
             src="https://cdn-icons-png.flaticon.com/512/724/724664.png"
             alt="Phone Icon"
           />
-          <span>+1 234 567 8900</span>
-        </div>
-        <div class="contact-info">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
-            alt="GitHub Icon"
-          />
-          <span>github.com/yourusername</span>
-        </div>
-        <div class="contact-info">
-          <img
-            src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
-            alt="LinkedIn Icon"
-          />
-          <span>linkedin.com/in/yourusername</span>
-        </div>
-        <button class="resume-btn">Download Resume</button>
-      </div>
-      <div class="contact-right">
-        <form onsubmit="event.preventDefault(); alert('Message sent!')">
-          <input type="text" placeholder="Your Name" required />
-          <input type="email" placeholder="Your Email" required />
-          <textarea rows="5" placeholder="Your Message" required></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </div>
-    </section>
-  </div>
-
-  <footer>
-    &copy; 2025 Muda Ibrahim. All rights reserved. | Built with ❤️ using HTML &amp; CSS.
-  </footer>
-</body>
-</html>
+         
