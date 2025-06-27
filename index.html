@@ -31,6 +31,7 @@
       line-height: 1.6;
       overflow-x: hidden;
       min-height: 100vh;
+      padding-top: 70px; /* for fixed header offset */
     }
 
     @keyframes gradientMove {
@@ -45,23 +46,68 @@
       }
     }
 
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 60px;
+      background: #00bfa5; /* fully opaque teal */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+      z-index: 1000;
+      box-shadow: 0 2px 8px rgba(0, 191, 165, 0.5);
+      user-select: none;
+    }
+
+    header .logo {
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #fff;
+      cursor: default;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    nav ul li a:hover,
+    nav ul li a:focus {
+      color: #008e7d;
+      outline: none;
+    }
+
+    /* Main container */
     .container {
       max-width: 1200px;
       margin: auto;
-      padding: 4rem 1rem;
+      padding: 4rem 1rem 2rem;
       position: relative;
       z-index: 1;
     }
 
-    h1 {
-      text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 2rem;
+    h1, h2 {
       color: #00bfa5;
     }
 
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+    }
+
     h2 {
-      color: #00bfa5;
       margin-bottom: 1.5rem;
     }
 
@@ -71,7 +117,7 @@
       margin-bottom: 4rem;
     }
 
-    /* Skills slider with transparent background */
+    /* Skills slider */
     .skills-slider {
       overflow: hidden;
       position: relative;
@@ -192,8 +238,8 @@
     }
 
     .contact-right {
-      flex: 1 1 300px;
-      max-width: 350px;
+      flex: 1 1 400px;
+      max-width: 600px;
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.05);
       padding: 2rem;
@@ -237,30 +283,59 @@
       box-shadow: 0 0 10px 3px rgba(0, 191, 165, 0.6);
     }
 
+    /* Footer */
+    footer {
+      margin-top: 4rem;
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ddd;
+      background: rgba(0, 191, 165, 0.25); /* brighter than before */
+      user-select: none;
+      box-shadow: inset 0 0 10px rgba(0,191,165,0.3);
+    }
+
     @media (max-width: 768px) {
       .contact {
         flex-direction: column;
+      }
+
+      .contact-right {
+        max-width: 100%;
+      }
+
+      nav ul {
+        gap: 1rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Muda Ibrahim</h1>
+  <header>
+    <div class="logo">Muda Ibrahim</div>
+    <nav>
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact Me</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <!-- About Me -->
-    <section class="about">
+  <div class="container">
+    <section id="about" class="about">
+      <h1>Muda Ibrahim</h1>
       <h2>About Me</h2>
       <p>
         I’m a Salesforce Certified Administrator with hands-on expertise in automation (Flow & Process Builder), integration (external systems, APIs), user adoption strategies, security & compliance, analytics, and troubleshooting. Passionate about building scalable CRM solutions that empower users and drive business value.
       </p>
     </section>
 
-    <!-- Skills Slider -->
-    <section class="skills">
+    <section id="skills" class="skills">
       <h2>My Core Skills</h2>
       <div class="skills-slider">
-        <div class="slide-track">
+        <div class="slide-track" aria-label="Skills slider">
           <div class="slide">Salesforce Automation</div>
           <div class="slide">Flows & Process Builder</div>
           <div class="slide">Data Management</div>
@@ -272,7 +347,6 @@
           <div class="slide">Sales Cloud</div>
           <div class="slide">Change Sets & Deployment</div>
 
-          <!-- duplicated for continuous loop -->
           <div class="slide">Salesforce Automation</div>
           <div class="slide">Flows & Process Builder</div>
           <div class="slide">Data Management</div>
@@ -287,8 +361,7 @@
       </div>
     </section>
 
-    <!-- Projects -->
-    <section class="projects">
+    <section id="projects" class="projects">
       <h2>Portfolio Projects</h2>
       <div class="grid">
         <div class="card" tabindex="0">
@@ -306,8 +379,7 @@
       </div>
     </section>
 
-    <!-- Contact Section -->
-    <section class="contact">
+    <section id="contact" class="contact">
       <div class="contact-left">
         <h2>Contact Me</h2>
         <div class="contact-info">
@@ -350,5 +422,9 @@
       </div>
     </section>
   </div>
+
+  <footer>
+    &copy; 2025 Muda Ibrahim. All rights reserved. | Built with ❤️ using HTML &amp; CSS.
+  </footer>
 </body>
 </html>
