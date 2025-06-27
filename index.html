@@ -2,9 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Senior Salesforce Admin Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Muda Ibrahim | Salesforce Admin Portfolio</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
   <style>
+    /* Reset */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,174 +24,331 @@
 
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: #f4f6f9;
-      color: #333;
+      background: linear-gradient(-45deg, #000000, #121212, #1a1a1a, #000000);
+      background-size: 400% 400%;
+      animation: gradientMove 30s ease infinite;
+      color: #fff;
       line-height: 1.6;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    header {
-      background: #00a1e0;
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
-      animation: slideDown 1s ease-out;
-    }
-
-    header h1 {
-      font-size: 2.5rem;
-    }
-
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.1rem;
+    @keyframes gradientMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
 
     .container {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: auto;
-      padding: 2rem 1rem;
+      padding: 4rem 1rem;
+      position: relative;
+      z-index: 1;
     }
 
-    .about, .projects {
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #00bfa5;
     }
 
-    .about.visible, .projects.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .about h2, .projects h2 {
-      color: #0070d2;
-      margin-bottom: 1rem;
-    }
-
-    .projects h2 {
+    h2 {
+      color: #00bfa5;
       margin-bottom: 1.5rem;
     }
 
+    .about,
+    .skills,
+    .projects {
+      margin-bottom: 4rem;
+    }
+
+    /* Skills slider with transparent background */
+    .skills-slider {
+      overflow: hidden;
+      position: relative;
+      margin-top: 2rem;
+      border-radius: 10px;
+      background: transparent;
+      border: none;
+    }
+
+    .slide-track {
+      display: flex;
+      width: calc(200px * 20);
+      animation: scroll 40s linear infinite;
+    }
+
+    .slide {
+      flex: 0 0 200px;
+      margin: 0 1rem;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      font-weight: 600;
+      color: #00bfa5;
+      border: 1px solid #00bfa5;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Projects grid */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
     }
 
+    /* Animated portfolio cards */
     .card {
-      background: white;
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 10px;
       padding: 1.5rem;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+      color: #fff;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
       cursor: pointer;
     }
 
     .card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 191, 165, 0.7);
     }
 
     .card h3 {
-      color: #0070d2;
+      color: #00bfa5;
       margin-bottom: 0.5rem;
     }
 
-    .card p {
-      font-size: 0.95rem;
+    /* Contact Section */
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-start;
+      justify-content: center;
     }
 
-    footer {
-      text-align: center;
-      padding: 2rem 1rem;
-      background: #e1e5ea;
-      color: #333;
-      font-size: 0.9rem;
+    .contact-left {
+      flex: 1 1 300px;
+      max-width: 350px;
+      color: #eee;
     }
 
-    footer a {
-      color: #0070d2;
-      text-decoration: none;
+    .contact-left h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #00bfa5;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .contact-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+      color: #ddd;
+      user-select: text;
     }
 
-    @keyframes slideDown {
-      from {
-        transform: translateY(-30px);
-        opacity: 0;
-      }
-      to {
-        transform: translateY(0);
-        opacity: 1;
-      }
+    .contact-info img {
+      width: 20px;
+      height: 20px;
     }
 
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
+    .resume-btn {
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background: #00bfa5;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .resume-btn:hover {
+      background: #008e7d;
+      box-shadow: 0 0 10px 3px rgba(0, 191, 165, 0.6);
+    }
+
+    .contact-right {
+      flex: 1 1 300px;
+      max-width: 350px;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #eee;
+    }
+
+    .contact-right form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact-right input,
+    .contact-right textarea {
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: transparent;
+      color: white;
+      border-radius: 6px;
+      font-size: 1rem;
+      resize: vertical;
+    }
+
+    .contact-right button {
+      background-color: #00bfa5;
+      color: #fff;
+      padding: 0.75rem;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .contact-right button:hover {
+      background-color: #008e7d;
+      box-shadow: 0 0 10px 3px rgba(0, 191, 165, 0.6);
+    }
+
+    @media (max-width: 768px) {
+      .contact {
+        flex-direction: column;
       }
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <h1>Muda Ibrahim</h1>
-    <p>Senior Salesforce Administrator | Automation • Integration • Data • UX</p>
-  </header>
-
   <div class="container">
+    <h1>Muda Ibrahim</h1>
+
+    <!-- About Me -->
     <section class="about">
       <h2>About Me</h2>
-      <p>I’m a Salesforce Certified Administrator with hands-on expertise in automation (Flow & Process Builder), integration (external systems, APIs), user adoption strategies, security & compliance, analytics, and troubleshooting. Passionate about building scalable CRM solutions that empower users and drive business value.</p>
+      <p>
+        I’m a Salesforce Certified Administrator with hands-on expertise in automation (Flow & Process Builder), integration (external systems, APIs), user adoption strategies, security & compliance, analytics, and troubleshooting. Passionate about building scalable CRM solutions that empower users and drive business value.
+      </p>
     </section>
 
+    <!-- Skills Slider -->
+    <section class="skills">
+      <h2>My Core Skills</h2>
+      <div class="skills-slider">
+        <div class="slide-track">
+          <div class="slide">Salesforce Automation</div>
+          <div class="slide">Flows & Process Builder</div>
+          <div class="slide">Data Management</div>
+          <div class="slide">SOQL & Reports</div>
+          <div class="slide">Security & Compliance</div>
+          <div class="slide">Integration (REST, APIs)</div>
+          <div class="slide">User Training & Adoption</div>
+          <div class="slide">Service Cloud</div>
+          <div class="slide">Sales Cloud</div>
+          <div class="slide">Change Sets & Deployment</div>
+
+          <!-- duplicated for continuous loop -->
+          <div class="slide">Salesforce Automation</div>
+          <div class="slide">Flows & Process Builder</div>
+          <div class="slide">Data Management</div>
+          <div class="slide">SOQL & Reports</div>
+          <div class="slide">Security & Compliance</div>
+          <div class="slide">Integration (REST, APIs)</div>
+          <div class="slide">User Training & Adoption</div>
+          <div class="slide">Service Cloud</div>
+          <div class="slide">Sales Cloud</div>
+          <div class="slide">Change Sets & Deployment</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects -->
     <section class="projects">
       <h2>Portfolio Projects</h2>
       <div class="grid">
-        <div class="card">
+        <div class="card" tabindex="0">
           <h3>Case Auto Routing via Omni-Channel</h3>
           <p>Designed and deployed Omni-Channel for auto-assignment of Cases by type and priority, improving response time by 40%.</p>
         </div>
-
-        <div class="card">
+        <div class="card" tabindex="0">
           <h3>Quote to Order Flow Automation</h3>
           <p>Built a complex Flow to automate syncing of Quote Line Items to Order Products upon Opportunity closure.</p>
         </div>
-
-        <div class="card">
+        <div class="card" tabindex="0">
           <h3>Sales Performance Dashboard</h3>
           <p>Created executive dashboards and reports for pipeline, top-performing reps, and product ROI tracking.</p>
         </div>
       </div>
     </section>
+
+    <!-- Contact Section -->
+    <section class="contact">
+      <div class="contact-left">
+        <h2>Contact Me</h2>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/732/732200.png"
+            alt="Email Icon"
+          />
+          <span>you@example.com</span>
+        </div>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/724/724664.png"
+            alt="Phone Icon"
+          />
+          <span>+1 234 567 8900</span>
+        </div>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/25/25231.png"
+            alt="GitHub Icon"
+          />
+          <span>github.com/yourusername</span>
+        </div>
+        <div class="contact-info">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/145/145807.png"
+            alt="LinkedIn Icon"
+          />
+          <span>linkedin.com/in/yourusername</span>
+        </div>
+        <button class="resume-btn">Download Resume</button>
+      </div>
+      <div class="contact-right">
+        <form onsubmit="event.preventDefault(); alert('Message sent!')">
+          <input type="text" placeholder="Your Name" required />
+          <input type="email" placeholder="Your Email" required />
+          <textarea rows="5" placeholder="Your Message" required></textarea>
+          <button type="submit">Send Message</button>
+        </form>
+      </div>
+    </section>
   </div>
-
-  <footer>
-    &copy; 2025 Muda Ibrahim • Connect via <a href="mailto:you@example.com">Email</a>
-  </footer>
-
-  <script>
-    // Simple scroll reveal effect
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, {
-      threshold: 0.2
-    });
-
-    document.querySelectorAll('.about, .projects').forEach(section => {
-      observer.observe(section);
-    });
-  </script>
-
 </body>
 </html>
